@@ -1,0 +1,355 @@
+<!doctype html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="いのさんの得意技、大外刈りを紹介するページです。"
+    />
+    <title>大外刈り | いのさんの得意技</title>
+    <style>
+      :root {
+        --ink: #152039;
+        --navy: #182a4a;
+        --deep-navy: #0d172a;
+        --red: #d4473d;
+        --gold: #ffc552;
+        --paper: #fffdf7;
+        --tatami: #dfe3c5;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      body {
+        margin: 0;
+        min-height: 100vh;
+        color: var(--ink);
+        background:
+          linear-gradient(90deg, rgba(255, 255, 255, 0.04) 1px, transparent 1px),
+          linear-gradient(rgba(255, 255, 255, 0.025) 1px, transparent 1px),
+          var(--deep-navy);
+        background-size: 40px 40px;
+        font-family: "Hiragino Kaku Gothic ProN", "Yu Gothic", "Noto Sans JP", sans-serif;
+      }
+
+      .page {
+        position: relative;
+        min-height: 100vh;
+        overflow: hidden;
+        padding: 30px;
+      }
+
+      .page::before {
+        position: fixed;
+        top: -18vw;
+        right: -16vw;
+        width: 48vw;
+        min-width: 420px;
+        aspect-ratio: 1;
+        border: clamp(48px, 8vw, 110px) solid rgba(212, 71, 61, 0.1);
+        border-radius: 50%;
+        content: "";
+      }
+
+      .back {
+        position: relative;
+        z-index: 5;
+        display: inline-flex;
+        align-items: center;
+        gap: 9px;
+        padding: 10px 14px;
+        border: 1px solid rgba(255, 255, 255, 0.18);
+        border-radius: 999px;
+        color: rgba(255, 255, 255, 0.82);
+        background: rgba(255, 255, 255, 0.04);
+        font-size: 0.86rem;
+        font-weight: 700;
+        text-decoration: none;
+        transition:
+          color 180ms ease,
+          background-color 180ms ease,
+          transform 180ms ease;
+      }
+
+      .back:hover,
+      .back:focus-visible {
+        color: var(--paper);
+        background: rgba(255, 255, 255, 0.1);
+        outline: none;
+        transform: translateX(-3px);
+      }
+
+      .technique {
+        position: relative;
+        z-index: 1;
+        display: grid;
+        grid-template-columns: minmax(280px, 0.78fr) minmax(340px, 1.22fr);
+        align-items: center;
+        gap: clamp(38px, 7vw, 100px);
+        width: min(1120px, 100%);
+        min-height: calc(100vh - 90px);
+        margin: 0 auto;
+        padding: 42px 0 70px;
+      }
+
+      .copy {
+        color: var(--paper);
+      }
+
+      .kicker {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        margin: 0 0 22px;
+        color: var(--gold);
+        font-size: 0.75rem;
+        font-weight: 800;
+        letter-spacing: 0.18em;
+      }
+
+      .kicker::before {
+        width: 32px;
+        height: 3px;
+        border-radius: 999px;
+        background: var(--red);
+        content: "";
+      }
+
+      h1 {
+        margin: 0;
+        font-family: "Yu Mincho", "Hiragino Mincho ProN", serif;
+        font-size: clamp(4.4rem, 9vw, 8.5rem);
+        font-weight: 700;
+        letter-spacing: -0.08em;
+        line-height: 0.9;
+        text-shadow: 5px 7px 0 rgba(212, 71, 61, 0.27);
+      }
+
+      .reading {
+        display: block;
+        margin: 20px 0 34px;
+        color: rgba(255, 255, 255, 0.48);
+        font-size: 0.76rem;
+        font-weight: 700;
+        letter-spacing: 0.27em;
+        text-transform: uppercase;
+      }
+
+      .description {
+        max-width: 32em;
+        margin: 0;
+        color: rgba(255, 255, 255, 0.82);
+        font-size: clamp(1.05rem, 2vw, 1.28rem);
+        line-height: 1.95;
+      }
+
+      .description strong {
+        color: var(--paper);
+        font-weight: 800;
+      }
+
+      .stage {
+        position: relative;
+        display: grid;
+        place-items: center;
+        isolation: isolate;
+        min-height: min(68vw, 650px);
+      }
+
+      .burst {
+        position: absolute;
+        z-index: -3;
+        width: 106%;
+        aspect-ratio: 1;
+        border-radius: 50%;
+        background: repeating-conic-gradient(
+          from -10deg,
+          rgba(255, 197, 82, 0.23) 0deg 2deg,
+          transparent 2deg 10deg
+        );
+        animation: burst-turn 18s linear infinite;
+      }
+
+      .impact-ring {
+        position: absolute;
+        z-index: -2;
+        width: 72%;
+        aspect-ratio: 1;
+        border: clamp(12px, 2vw, 25px) solid var(--red);
+        border-radius: 47% 53% 51% 49% / 56% 45% 55% 44%;
+        box-shadow:
+          0 0 0 9px rgba(212, 71, 61, 0.1),
+          0 0 80px rgba(212, 71, 61, 0.28);
+        animation: ring-pulse 2.8s ease-in-out infinite;
+        transform: rotate(-8deg);
+      }
+
+      .image-wrap {
+        position: relative;
+        width: min(83%, 550px);
+        margin: 0;
+        overflow: hidden;
+        border: 7px solid var(--paper);
+        border-radius: 32px 12px 32px 12px;
+        background: white;
+        box-shadow:
+          20px 22px 0 rgba(212, 71, 61, 0.78),
+          0 35px 80px rgba(0, 0, 0, 0.42);
+        animation: throw-in 850ms cubic-bezier(0.18, 0.9, 0.28, 1.22) both;
+        transform: rotate(-4deg);
+      }
+
+      .image-wrap::after {
+        position: absolute;
+        inset: 0;
+        border: 2px solid rgba(255, 197, 82, 0.68);
+        border-radius: 23px 5px 23px 5px;
+        content: "";
+        pointer-events: none;
+      }
+
+      .image-wrap img {
+        display: block;
+        width: 100%;
+        height: auto;
+      }
+
+      .impact-word {
+        position: absolute;
+        right: 1%;
+        bottom: 8%;
+        z-index: 3;
+        margin: 0;
+        color: var(--paper);
+        font-family: "Yu Mincho", "Hiragino Mincho ProN", serif;
+        font-size: clamp(1.7rem, 4vw, 3.4rem);
+        font-weight: 800;
+        letter-spacing: 0.06em;
+        text-shadow:
+          3px 3px 0 var(--red),
+          6px 6px 0 rgba(13, 23, 42, 0.82);
+        animation: impact-pop 500ms 620ms cubic-bezier(0.18, 0.9, 0.28, 1.4) both;
+        transform: rotate(-8deg);
+      }
+
+      @keyframes throw-in {
+        from {
+          opacity: 0;
+          transform: translate(18%, -10%) rotate(13deg) scale(0.72);
+        }
+        70% {
+          transform: translate(-2%, 2%) rotate(-7deg) scale(1.04);
+        }
+        to {
+          opacity: 1;
+          transform: translate(0, 0) rotate(-4deg) scale(1);
+        }
+      }
+
+      @keyframes impact-pop {
+        from {
+          opacity: 0;
+          transform: rotate(-8deg) scale(2.2);
+        }
+        to {
+          opacity: 1;
+          transform: rotate(-8deg) scale(1);
+        }
+      }
+
+      @keyframes ring-pulse {
+        0%,
+        100% {
+          opacity: 0.82;
+          transform: rotate(-8deg) scale(0.98);
+        }
+        50% {
+          opacity: 1;
+          transform: rotate(-5deg) scale(1.04);
+        }
+      }
+
+      @keyframes burst-turn {
+        to {
+          transform: rotate(360deg);
+        }
+      }
+
+      @media (max-width: 790px) {
+        .page {
+          padding: 20px;
+        }
+
+        .technique {
+          grid-template-columns: 1fr;
+          gap: 22px;
+          padding: 64px 0 58px;
+        }
+
+        .copy {
+          width: min(580px, 100%);
+          margin: 0 auto;
+        }
+
+        h1 {
+          font-size: clamp(4.3rem, 21vw, 7.2rem);
+        }
+
+        .stage {
+          width: min(620px, 100%);
+          min-height: min(100vw, 580px);
+          margin: 0 auto;
+        }
+
+        .image-wrap {
+          width: 75%;
+        }
+      }
+
+      @media (prefers-reduced-motion: reduce) {
+        .burst,
+        .impact-ring,
+        .image-wrap,
+        .impact-word {
+          animation: none;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <main class="page">
+      <a class="back" href="index.html" aria-label="いのさんの自己紹介へ戻る">
+        <span aria-hidden="true">←</span> 自己紹介へ戻る
+      </a>
+
+      <article class="technique" aria-labelledby="technique-title">
+        <section class="copy">
+          <p class="kicker">INO'S SPECIAL TECHNIQUE</p>
+          <h1 id="technique-title">大外刈り</h1>
+          <span class="reading">Osoto-gari</span>
+          <p class="description">
+            いのさんの得意技は、<strong>大外刈り</strong>です。<br />
+            相手の脚を外側から大きく刈り、豪快に倒す柔道の投げ技です。
+          </p>
+        </section>
+
+        <div class="stage" aria-label="大外刈りのイラスト">
+          <div class="burst" aria-hidden="true"></div>
+          <div class="impact-ring" aria-hidden="true"></div>
+          <figure class="image-wrap">
+            <img
+              src="osotogari.png"
+              alt="いのさんが得意とする大外刈りのイラスト"
+              width="1024"
+              height="1024"
+            />
+          </figure>
+          <p class="impact-word" aria-hidden="true">大外刈り！</p>
+        </div>
+      </article>
+    </main>
+  </body>
+</html>
